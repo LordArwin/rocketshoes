@@ -6,9 +6,19 @@ import logo from '../../assets/images/logo.svg';
 import { Container, Cart } from './styles';
 import { useCart } from '../../hooks/useCart';
 
+interface CartItemsAmount {
+  [key: number]: number;
+}
+
 const Header = (): JSX.Element => {
-  // const { cart } = useCart();
-  // const cartSize = // TODO;
+  const { cart } = useCart();
+  const cartSize =  cart.reduce((sumAmount, product) => {
+    if(!sumAmount.includes(product.id)){
+      sumAmount.push(product.id)
+    }
+    
+    return sumAmount
+  }, [] as Number[]).length
 
   return (
     <Container>
@@ -20,7 +30,7 @@ const Header = (): JSX.Element => {
         <div>
           <strong>Meu carrinho</strong>
           <span data-testid="cart-size">
-            {/* {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`} */}
+            {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`}
           </span>
         </div>
         <MdShoppingBasket size={36} color="#FFF" />
