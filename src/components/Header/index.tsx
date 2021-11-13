@@ -13,12 +13,9 @@ interface CartItemsAmount {
 const Header = (): JSX.Element => {
   const { cart } = useCart();
   const cartSize =  cart.reduce((sumAmount, product) => {
-    if(!sumAmount.includes(product.id)){
-      sumAmount.push(product.id)
-    }
-    
+    sumAmount.push([product.id])
     return sumAmount
-  }, [] as Number[]).length
+  }, [] as CartItemsAmount[]).length
 
   return (
     <Container>
